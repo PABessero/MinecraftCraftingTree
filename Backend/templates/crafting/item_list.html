@@ -1,0 +1,12 @@
+{%  block content %}
+
+    <h1>Item List</h1>
+    {% if item_list %}
+        <ul>
+        {% for item in item_list %}
+        	<li>{{ item }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endblock %}
