@@ -6,7 +6,7 @@ from Crafting.models import Item, Recipe, RecipeItemLinkInput, RecipeItemLinkOut
 class ItemSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Item
-        fields = ['id', 'name', 'icon']
+        fields = ['id', 'name', 'icon', 'recipe_inputs']
 
 
 class ItemViewSet(viewsets.ModelViewSet):
@@ -17,30 +17,31 @@ class ItemViewSet(viewsets.ModelViewSet):
 class MachineSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Machine
-        fields = ('name', 'mod')
+        fields = ['name', 'mod']
 
 
 class RecipeInputSerializer(serializers.ModelSerializer):
-    # recipe_item = ItemSerializer(many=True, read_only=True)
     class Meta:
         model = RecipeItemLinkInput
-        fields = ('id', 'amount')
+        fields = ['item', 'amount', 'used']
         # fields = '__all__'
 
 
 class RecipeOutputSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecipeItemLinkOutput
-        fields = ('amount')
+        fields = ('item', 'amount')
+
 
 class RecipeSerializer(serializers.ModelSerializer):
-    depth = 2
+    depth = 0
     machine = MachineSerializer()
-    inputs = RecipeInputSerializer(many=True, read_only=True)
-    # outputs = RecipeOutputSerializer(many=True)
+    item_inputs = RecipeInputSerializer(many=True)
+    item_outputs = RecipeOutputSerializer(many=True)
+
     class Meta:
         model = Recipe
-        fields = ['id', 'name', 'machine', 'inputs', 'outputs', 'crafting_time', 'process_energy']
+        fields = ['id', 'name', 'machine', 'item_inputs', 'item_outputs', 'crafting_time', 'process_energy']
         # fields = '__all__'
 
 

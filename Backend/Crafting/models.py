@@ -40,14 +40,15 @@ class Recipe(models.Model):
 
 
 class RecipeItemLinkInput(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='item_inputs', on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     amount = models.IntegerField(default=0)
+    used = models.BooleanField(default=True)
 
 
 class RecipeItemLinkOutput(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, related_name='item_outputs', on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     amount = models.IntegerField(default=0)
