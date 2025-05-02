@@ -1,5 +1,5 @@
 import Item from "./item.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 
 const defaultItems = [
@@ -14,6 +14,9 @@ const defaultItems = [
 
 export default function ItemList() {
     const [items, setItems] = useState(defaultItems);
+    useEffect(() => {
+        loadItemList();
+    }, [])
 
     const itemList = items.map((item, i) => {
         return <Item dataTest="Test" key={i} item={item} />

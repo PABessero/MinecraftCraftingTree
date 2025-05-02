@@ -22,7 +22,7 @@ from django.contrib.auth.models import User
 from django.urls import path, include
 from rest_framework import serializers, viewsets, routers, settings
 
-from Crafting.api_views import ItemViewSet, RecipeViewSet, RecipeInputViewSet
+from Crafting.api_views import ItemViewSet, RecipeViewSet
 from Crafting.views import ItemListView
 from django.conf import settings
 
@@ -42,11 +42,10 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'items', ItemViewSet)
 router.register(r'recipes', RecipeViewSet)
-router.register(r'input', RecipeInputViewSet)
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('admin/', admin.site.urls),
-    # path('items', ItemListView.as_view(), name='item-list'),
-    path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('api/', include(router.urls)),
+                  path('admin/', admin.site.urls),
+                  # path('items', ItemListView.as_view(), name='item-list'),
+                  path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

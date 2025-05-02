@@ -26,7 +26,6 @@ export default function Item({item = defaultItem}) {
                 }}>{item.name}</p>
             </div>
             <Divider/>
-            <p>I'm a {item.name}!</p>
         </Paper>
     );
 }

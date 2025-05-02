@@ -21,6 +21,7 @@ class MachineSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class RecipeInputSerializer(serializers.ModelSerializer):
+    item = ItemSerializer()
     class Meta:
         model = RecipeItemLinkInput
         fields = ['item', 'amount', 'used']
@@ -28,6 +29,7 @@ class RecipeInputSerializer(serializers.ModelSerializer):
 
 
 class RecipeOutputSerializer(serializers.ModelSerializer):
+    item = ItemSerializer()
     class Meta:
         model = RecipeItemLinkOutput
         fields = ('item', 'amount')
